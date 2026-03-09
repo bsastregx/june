@@ -1,0 +1,20 @@
+/* Illustration icon color tokens — surface-adaptive.
+   Uses NX primary (#5BA7FF) as accent.
+   TODO: make brand-aware via var(--brand) when multi-brand is needed. */
+
+:root {
+  /* Light surface (white background) */
+  --icon-accent: var(--nx);
+  --icon-line: var(--black);
+  --icon-fill: var(--grey-200);
+  --icon-fill: color-mix(in srgb, var(--nx) 8%, var(--grey-200));
+  --icon-bg: #FFFFFF;
+}
+
+[data-surface="dark"] {
+  --icon-accent: var(--nx);
+  --icon-line: #FFFFFF;
+  --icon-fill: var(--grey-800);
+  --icon-fill: color-mix(in srgb, var(--nx) 8%, var(--grey-800));
+  --icon-bg: var(--grey-900);
+}

@@ -1,0 +1,68 @@
+{
+  "clean": [
+    "scalability"
+  ],
+  "flagged": [
+    {
+      "name": "ai",
+      "issues": [
+        "tight-padding"
+      ]
+    },
+    {
+      "name": "api",
+      "issues": [
+        "tight-padding"
+      ]
+    },
+    {
+      "name": "chatbot",
+      "issues": [
+        "tight-padding"
+      ]
+    },
+    {
+      "name": "cloud",
+      "issues": [
+        "prohibited-element:clipPath",
+        "tight-padding"
+      ]
+    },
+    {
+      "name": "data",
+      "issues": [
+        "tight-padding"
+      ]
+    },
+    {
+      "name": "design-system",
+      "issues": [
+        "tight-padding"
+      ]
+    },
+    {
+      "name": "patterns",
+      "issues": [
+        "tight-padding"
+      ]
+    },
+    {
+      "name": "security",
+      "issues": [
+        "tight-padding"
+      ]
+    },
+    {
+      "name": "webinar",
+      "issues": [
+        "tight-padding"
+      ]
+    }
+  ],
+  "stats": {
+    "total": 10,
+    "clean": 1,
+    "flagged": 9,
+    "totalSizeKB": 11
+  }
+}

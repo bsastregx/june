@@ -1,0 +1,66 @@
+:host {
+  display: block;
+}
+
+/* ── Section container ── */
+
+.lm {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-10);
+  padding: var(--sp-10) var(--_section-px, var(--sp-10));
+  background: var(--grey-50);
+  color: var(--black);
+}
+
+/* ── Text column ── */
+
+.lm__text {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  min-width: 0;
+}
+
+/* ── CTA column ── */
+
+.lm__cta {
+  display: flex;
+  gap: var(--sp-5);                          /* 24px — aligned with SAT/ISL/LAM/CR */
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Tablet (≤1024px) ── */
+
+@media (max-width: 1024px) {
+  .lm {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-6);
+    padding: var(--sp-9) var(--sp-8);
+  }
+
+  .lm__cta {
+    gap: var(--sp-5);
+  }
+}
+
+/* ── Mobile (≤640px) ── */
+
+@media (max-width: 640px) {
+  .lm {
+    padding: var(--sp-8) var(--sp-5);
+  }
+
+  .lm__text {
+    gap: var(--sp-5);                        /* 24px — aligned with SAT/ISL */
+  }
+
+  .lm__cta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-4);
+  }
+}

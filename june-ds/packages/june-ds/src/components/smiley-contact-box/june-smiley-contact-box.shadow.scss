@@ -1,0 +1,80 @@
+:host {
+  display: block;
+}
+
+/* ── Section wrapper ── */
+
+.scb {
+  padding: var(--sp-10) var(--_section-px, var(--sp-10));
+  background: var(--grey-50);
+}
+
+.scb__inner {
+  display: flex;
+  gap: var(--sp-8);
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* ── Info column ── */
+
+.scb__info {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-block-start: var(--sp-4);
+  min-width: 0;
+}
+
+.scb__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding-block-end: var(--sp-6);
+  width: 100%;
+}
+
+/* ── Avatar ── */
+
+.scb__avatar {
+  width: var(--_avatar-size, 130px);
+  height: var(--_avatar-size, 130px);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.scb__avatar ::slotted(img) {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.scb__avatar-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: var(--_ring-width, 3px) solid var(--gx);
+  pointer-events: none;
+}
+
+/* ── Brand ring ── */
+:host-context([data-brand="gx"]) .scb__avatar-ring { border-color: var(--gx); }
+:host-context([data-brand="nx"]) .scb__avatar-ring { border-color: var(--nx); }
+:host-context([data-brand="ge"]) .scb__avatar-ring { border-color: var(--ge); }
+
+/* ── Form column ── */
+
+.scb__form {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+
+/* Dark mode: not needed — preview lives inside [data-surface="light"]
+   which restores all tokens. body.dm = showcase chrome only.
+   When June DS gets its own dark mode, use [data-ds-theme="dark"]. */

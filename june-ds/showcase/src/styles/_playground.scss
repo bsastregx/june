@@ -1,0 +1,196 @@
+/* ─── Button Page Layout ─── */
+.btn-controls { display: flex; gap: var(--sp-4); margin-bottom: var(--sp-5); flex-wrap: wrap; }
+.btn-pills {
+  display: inline-flex; padding: 3px; border-radius: var(--r-full);
+  background: var(--bg); border: 1px solid var(--card-border);
+}
+body.dm .btn-pills { background: var(--dark-head); border-color: var(--card-border); }
+.btn-pills button {
+  font-family: var(--font-body); font-size: 12px; font-weight: 500;
+  padding: 5px 14px; border-radius: calc(var(--r-full) - 3px); border: none;
+  background: transparent; color: var(--grey-500); cursor: pointer;
+  transition: all var(--duration-fast) var(--ease); display: flex; align-items: center; gap: 5px;
+}
+body.dm .btn-pills button { color: var(--grey-500); }
+.btn-pills button:hover { color: var(--black); }
+body.dm .btn-pills button:hover { color: var(--black); }
+.btn-pills button.on {
+  background: var(--card); color: var(--black);
+  box-shadow: var(--shadow-xs);
+}
+body.dm .btn-pills button.on { background: var(--active-bg); color: var(--active-text); }
+.btn-pills .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+/* ─── Playground inline inputs (select, text) ─── */
+.eb-input {
+  font-family: var(--font-body); font-size: 12px; font-weight: 400;
+  padding: 5px 10px; border-radius: var(--r-sm);
+  border: 2px solid var(--card-border); background: var(--card); color: var(--black);
+  outline: none; transition: border-color var(--duration-fast) var(--ease),
+              box-shadow var(--duration-fast) var(--ease);
+}
+select.eb-input {
+  appearance: none;
+  padding-right: var(--sp-5);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  cursor: pointer;
+}
+.eb-input:hover { border-color: var(--grey-400); }
+.eb-input:focus { border-color: var(--brand, var(--gx)); box-shadow: 0 0 0 1px var(--brand, var(--gx)); }
+body.dm .eb-input { background: var(--dark-card); border-color: var(--card-border); color: var(--dark-text, #eee); }
+body.dm .eb-input:hover { border-color: var(--grey-500); }
+
+/* ─── Playground Controls (shared across all component pages) ─── */
+.pg-controls { display: flex; flex-direction: column; gap: var(--sp-3); margin-bottom: var(--sp-5); }
+.pg-controls__row { display: flex; gap: var(--sp-4); flex-wrap: wrap; align-items: center; justify-content: center; }
+.pg-controls__group { display: flex; align-items: center; gap: var(--sp-2); }
+.pg-controls__label {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em; color: var(--grey-500);
+  white-space: nowrap;
+}
+body.dm .pg-controls__label { color: var(--grey-500); }
+
+.pg-controls__stencil {
+  color: var(--black);
+}
+body.dm .pg-controls__stencil { color: var(--white); }
+.pg-controls__sep { width: 1px; height: var(--sp-4); background: var(--grey-300); flex-shrink: 0; }
+body.dm .pg-controls__sep { background: var(--grey-600); }
+.pg-preview {
+  border: 1px solid var(--card-border); border-radius: var(--r-lg); overflow: hidden;
+}
+body.dm .pg-preview { border-color: transparent; }
+
+/* Reset button for playgrounds */
+.pg-controls__reset {
+  padding: 5px 14px;
+  border: 1px solid var(--grey-300);
+  border-radius: var(--r-full);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--grey-500);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+.pg-controls__reset:hover,
+.pg-controls__reset:focus-visible { border-color: var(--black); color: var(--black); }
+.pg-controls__reset:active { transform: scale(0.96); }
+body.dm .pg-controls__reset { border-color: var(--grey-600); color: var(--grey-500); }
+body.dm .pg-controls__reset:hover,
+body.dm .pg-controls__reset:focus-visible { border-color: var(--dark-text); color: var(--dark-text); }
+
+/* Matrix */
+.matrix { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--card-border); }
+.matrix__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+body.dm .matrix { border-color: var(--card-border); }
+.matrix__head {
+  display: flex; align-items: center; padding: 14px 20px; gap: var(--sp-3);
+  background: var(--card-head); border-bottom: 1px solid var(--card-border);
+}
+body.dm .matrix__head { background: var(--dark-head); border-color: var(--card-border); }
+body.dm [data-surface="light"] .matrix__head { background: var(--card-head); border-color: var(--card-border); }
+.matrix__title { font-size: 14px; font-weight: 600; color: var(--black); }
+.matrix__subtitle { font-size: 12px; font-weight: 500; color: var(--grey-600); margin-left: auto; }
+body.dm .matrix__subtitle { color: var(--grey-500); }
+body.dm [data-surface="light"] .matrix__subtitle { color: var(--grey-600); }
+
+.matrix__grid {
+  display: grid; grid-template-columns: 120px repeat(6, 1fr);
+  background: var(--bg); overflow-x: auto;
+}
+
+/* ─── Background selector (dot swatches) ─── */
+.pg-bg-pills {
+  display: inline-flex; gap: 4px; align-items: center;
+}
+.pg-bg-dot {
+  position: relative;
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid var(--grey-300); cursor: pointer;
+  transition: box-shadow var(--duration-fast) var(--ease),
+              border-color var(--duration-fast) var(--ease);
+}
+.pg-bg-dot::after {
+  content: ''; position: absolute;
+  top: 50%; left: 50%; width: 44px; height: 44px;
+  transform: translate(-50%, -50%);
+}
+.pg-bg-dot:hover { border-color: var(--black); }
+.pg-bg-dot:focus-visible { outline: 2px solid var(--focus-color, var(--gx)); outline-offset: 2px; }
+.pg-bg-dot.on {
+  border-color: var(--black);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px var(--black);
+}
+.pg-bg-dot--default {
+  background: linear-gradient(135deg, #fff 43%, #ccc 43%, #ccc 57%, #fff 57%);
+}
+body.dm .pg-bg-dot { border-color: var(--grey-600); }
+body.dm .pg-bg-dot:hover { border-color: var(--dark-text); }
+body.dm .pg-bg-dot.on {
+  border-color: var(--dark-text);
+  box-shadow: 0 0 0 2px var(--dark-bg), 0 0 0 3.5px var(--dark-text);
+}
+
+/* ─── Playground bg: eyebrow chip overrides for legibility ─── */
+[data-pg-bg="accent"] .lam-eyebrow__icon,
+[data-pg-bg="accent"] .lam-eyebrow__tag {
+  background: color-mix(in srgb, var(--pg-bg-color, #fff), black 15%);
+}
+[data-pg-bg="dark"] .lam-eyebrow { border-color: rgba(255,255,255,0.25); }
+[data-pg-bg="dark"] .lam-eyebrow__icon {
+  background: color-mix(in srgb, var(--pg-bg-color, #171717), white 15%);
+  color: #eee;
+}
+[data-pg-bg="dark"] .lam-eyebrow__icon svg { stroke: #eee; }
+[data-pg-bg="dark"] .lam-eyebrow__tag {
+  background: color-mix(in srgb, var(--pg-bg-color, #171717), white 15%);
+  color: #eee;
+}
+[data-pg-bg="dark"] .lam-eyebrow__text,
+[data-pg-bg="dark"] .lam-eyebrow__dash,
+[data-pg-bg="dark"] .lam-eyebrow__cta { color: #eee; }
+
+/* ─── Playground bg: card surface overrides ───
+   !important to beat body.dm .blk__card (same specificity, later source order) */
+[data-pg-bg="accent"] .blk__card { background: #fff !important; }
+[data-pg-bg="dark"] .blk__card { background: #212121 !important; }
+
+
+/* ─── Sticky props bar ─── */
+.pg-sticky {
+  position: sticky;
+  bottom: var(--sp-5);
+  z-index: var(--z-raised);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  gap: var(--sp-3) var(--sp-4);
+  padding: var(--sp-3) var(--sp-5);
+  margin: var(--sp-3) auto 0;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--r-lg);
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+  transition: transform var(--duration) var(--ease),
+              opacity var(--duration) var(--ease);
+}
+body.dm .pg-sticky {
+  box-shadow: none;
+  border-color: var(--card-border);
+}
+.pg-sticky--hidden {
+  transform: translateY(8px);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pg-sticky { transition: none; }
+}

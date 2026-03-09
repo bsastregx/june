@@ -1,0 +1,22 @@
+{
+  "name": "june-ds-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "showcase"
+  ],
+  "scripts": {
+    "build": "npm run build:lib && npm run build:showcase",
+    "build:lib": "cd packages/june-ds && npm run build",
+    "build:showcase": "cd showcase && npm run build",
+    "dev": "cd showcase && npm run dev",
+    "dev:showcase": "cd showcase && npm run dev",
+    "tokens": "cd packages/june-ds && npm run tokens",
+    "dev:playground": "cd packages/playground && npm run dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

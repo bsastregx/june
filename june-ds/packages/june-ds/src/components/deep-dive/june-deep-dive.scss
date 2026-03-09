@@ -1,0 +1,558 @@
+/* ─── Deep Dive — Accordion stencil with rich/simple variants ───
+   Figma specs:
+   Desktop (1440px): 6613:12405
+   Tablet (768px): 6613:12458
+   Mobile (428px): 6613:12432
+   Accordion with expandable items + featured side image (desktop)
+   or inline image (tablet/mobile).
+─── */
+
+.dd {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);               /* 128px title→content */
+  padding: var(--sp-10);           /* 128px all sides */
+  background: var(--card);
+  border-radius: var(--r-2xl);
+}
+
+/* ── Title ── */
+
+.dd__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);                    /* 16px — aligned with SAT/BLK/CR */
+  width: 940px;
+  max-width: 100%;
+  text-align: center;
+  align-self: center;
+}
+
+.dd__title {
+  font: var(--h2);
+  letter-spacing: -0.03em;
+  color: var(--black);
+  margin: 0;
+  width: 100%;
+}
+
+.dd__strapline {
+  font: var(--highlight-l);
+  color: var(--black);
+  width: 100%;
+}
+
+/* ── Body: two-column wrapper ── */
+
+.dd__body {
+  display: flex;
+  gap: var(--sp-9);                /* 80px */
+  align-items: stretch;
+}
+
+/* ── Accordion list ── */
+
+.dd__list {
+  flex: 0 0 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Footer link ── */
+
+.dd__footer {
+  display: inline-block;
+  font: var(--highlight-s);
+  color: var(--black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-top: var(--sp-6);        /* 32px above */
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.dd__footer:hover { color: var(--gx); }
+[data-brand="nx"] .dd__footer:hover { color: var(--nx); }
+[data-brand="ge"] .dd__footer:hover { color: var(--ge); }
+
+/* ── Side image (desktop only) ── */
+
+.dd__media {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  border-radius: var(--r-2xl);
+  overflow: hidden;
+}
+
+.dd__media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: opacity var(--duration) var(--ease);
+}
+
+/* ── data-split: column ratio (desktop only) ── */
+
+.dd[data-split="40-60"] .dd__body > :first-child { flex: 2 1 0; min-width: 0; }
+.dd[data-split="40-60"] .dd__body > :last-child  { flex: 3 1 0; min-width: 0; }
+
+.dd[data-split="50-50"] .dd__body > :first-child,
+.dd[data-split="50-50"] .dd__body > :last-child  { flex: 1 1 0; min-width: 0; }
+
+.dd[data-split="60-40"] .dd__body > :first-child { flex: 3 1 0; min-width: 0; }
+.dd[data-split="60-40"] .dd__body > :last-child  { flex: 2 1 0; min-width: 0; }
+
+/* ── Accordion item ── */
+
+.dd__item {
+  border-bottom: 1px solid var(--grey-300);
+}
+
+/* ── Item head (clickable row) ── */
+
+.dd__item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-5) var(--sp-5) var(--sp-5) 0;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.dd__item-head:hover .dd__item-name {
+  color: var(--gx);
+  transform: translateX(4px);
+}
+[data-brand="nx"] .dd__item-head:hover .dd__item-name { color: var(--nx); }
+[data-brand="ge"] .dd__item-head:hover .dd__item-name { color: var(--ge); }
+
+/* ── Item name ── */
+
+.dd__item-name {
+  font: var(--highlight-m);
+  color: var(--black);
+  transition: color var(--duration-fast) var(--ease),
+              transform var(--duration-fast) var(--ease);
+}
+
+/* Expanded item: title upgrades to title-4 */
+.dd__item--on .dd__item-name {
+  font: var(--title-4);
+}
+
+/* ── Icon (unified plus→minus morph) ── */
+
+.dd__item-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--grey-500);
+  transition: opacity var(--duration) var(--ease),
+              color var(--duration-fast) var(--ease);
+}
+
+/* Icon follows brand color on hover */
+.dd__item-head:hover .dd__item-icon { color: var(--gx); }
+[data-brand="nx"] .dd__item-head:hover .dd__item-icon { color: var(--nx); }
+[data-brand="ge"] .dd__item-head:hover .dd__item-icon { color: var(--ge); }
+
+.dd__icon-v {
+  transition: transform var(--duration) var(--ease);
+  transform-origin: center;
+}
+
+/* Rich: icon fades out when expanded */
+.dd__item--on .dd__item-icon { opacity: 0; }
+
+/* Vertical line rotates 90° → aligns with horizontal → visual minus */
+.dd__item--on .dd__icon-v { transform: rotate(90deg); }
+
+/* ── Accordion body (grid 0fr→1fr) ── */
+
+.dd__item-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration) var(--ease);
+}
+
+.dd__item--on .dd__item-body {
+  grid-template-rows: 1fr;
+  transition-delay: 50ms;          /* font snap on name settles first, then body opens */
+}
+
+/* ── Expanded content ── */
+
+.dd__item-content {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);                /* 24px between desc and link */
+  padding-bottom: var(--sp-6);    /* 32px gap to border — always present, grid hides when collapsed */
+}
+
+/* ── Content stagger ── */
+
+.dd__item-content > * {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--duration) var(--ease),
+              transform var(--duration) var(--ease);
+}
+
+/* Close: reverse stagger — last child exits first */
+.dd__item-content > :nth-child(1) { transition-delay: 80ms; }
+.dd__item-content > :nth-child(2) { transition-delay: 40ms; }
+.dd__item-content > :nth-child(3) { transition-delay: 0ms; }
+
+/* Open: forward stagger — first child enters first */
+.dd__item--on .dd__item-content > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dd__item--on .dd__item-content > :nth-child(1) { transition-delay: 60ms; }
+.dd__item--on .dd__item-content > :nth-child(2) { transition-delay: 120ms; }
+.dd__item--on .dd__item-content > :nth-child(3) { transition-delay: 180ms; }
+
+/* ── Description ── */
+
+.dd__item-desc {
+  font: var(--body-m);
+  color: var(--text);
+  margin: 0;
+}
+
+/* ── Story link ── */
+
+.dd__item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font: var(--highlight-s);
+  color: var(--black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.dd__item-link:hover { color: var(--gx); }
+[data-brand="nx"] .dd__item-link:hover { color: var(--nx); }
+[data-brand="ge"] .dd__item-link:hover { color: var(--ge); }
+
+/* ── Inline image (tablet/mobile only — hidden on desktop) ── */
+
+.dd__item-media {
+  display: none;
+  border-radius: var(--r-2xl);
+  overflow: hidden;
+}
+
+.dd__item-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ── Focus & keyboard accessibility ── */
+
+.dd__item-head:focus-visible {
+  outline: 2px solid var(--brand, var(--gx));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.dd__item-link:focus-visible {
+  outline: 2px solid var(--brand, var(--gx));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.dd__footer:focus-visible {
+  outline: 2px solid var(--brand, var(--gx));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Tablet (768px) ── */
+
+.lam-viewport[data-bp="tablet"] .dd {
+  padding: var(--sp-9) var(--sp-7);    /* 80px 48px */
+  gap: var(--sp-8);                     /* 64px title→content */
+  border-radius: var(--r-2xl);
+}
+
+.lam-viewport[data-bp="tablet"] .dd__header {
+  width: 100%;
+}
+
+.lam-viewport[data-bp="tablet"] .dd__strapline {
+  font: var(--highlight-m);
+}
+
+.lam-viewport[data-bp="tablet"] .dd__body {
+  flex-direction: column;
+  gap: 0;
+}
+
+.lam-viewport[data-bp="tablet"] .dd__list {
+  flex: none;
+  width: 100%;
+}
+
+/* Hide side image on tablet */
+.lam-viewport[data-bp="tablet"] .dd__media {
+  display: none;
+}
+
+/* Undo split on tablet — columns collapse to single */
+.lam-viewport[data-bp="tablet"] .dd[data-split] .dd__body > * {
+  flex: none;
+  min-width: unset;
+}
+
+/* Show inline image on tablet */
+.lam-viewport[data-bp="tablet"] .dd__item-media {
+  display: block;
+  height: 475px;
+}
+
+.lam-viewport[data-bp="tablet"] .dd__item--on .dd__item-content {
+  gap: var(--sp-6);                     /* 32px between text group and image */
+  padding-bottom: var(--sp-7);          /* 48px */
+}
+
+/* ── Mobile (428px) ── */
+
+.lam-viewport[data-bp="mobile"] .dd {
+  padding: var(--sp-8) var(--sp-5);     /* 64px 24px */
+  gap: var(--sp-7);                      /* 48px title→content */
+  border-radius: 0;                      /* full-bleed */
+}
+
+.lam-viewport[data-bp="mobile"] .dd__header {
+  width: 100%;
+  gap: var(--sp-2);                      /* 8px — aligned with SAT/BLK/CR */
+}
+
+.lam-viewport[data-bp="mobile"] .dd__strapline {
+  font: var(--highlight-s);
+}
+
+.lam-viewport[data-bp="mobile"] .dd__body {
+  flex-direction: column;
+  gap: 0;
+}
+
+.lam-viewport[data-bp="mobile"] .dd__list {
+  flex: none;
+  width: 100%;
+}
+
+/* Hide side image on mobile */
+.lam-viewport[data-bp="mobile"] .dd__media {
+  display: none;
+}
+
+/* Undo split on mobile — columns collapse to single */
+.lam-viewport[data-bp="mobile"] .dd[data-split] .dd__body > * {
+  flex: none;
+  min-width: unset;
+}
+
+/* Show inline image on mobile */
+.lam-viewport[data-bp="mobile"] .dd__item-media {
+  display: block;
+  height: 239px;
+}
+
+.lam-viewport[data-bp="mobile"] .dd__item-name {
+  font: var(--highlight-s);
+}
+
+.lam-viewport[data-bp="mobile"] .dd__item--on .dd__item-name {
+  font: var(--title-5);
+}
+
+.lam-viewport[data-bp="mobile"] .dd__item--on .dd__item-content {
+  gap: var(--sp-6);
+  padding-bottom: var(--sp-7);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Simple variant — title+body left, accordion right, no images
+   Figma: 7424:2916 (desktop 1440px)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.dd--simple {
+  gap: 0;                                /* title is inside body, no top gap */
+  padding: var(--sp-10) 0 var(--sp-10) var(--sp-10); /* asymmetric: no right */
+}
+
+/* ── Left column: title + subtitle ── */
+
+.dd--simple .dd__header {
+  flex: 1;
+  min-width: 0;
+  position: sticky;
+  top: var(--sp-10);                     /* 128px — matches container padding */
+  align-self: flex-start;
+  text-align: left;
+  width: auto;
+}
+
+.dd__subtitle {
+  font: var(--highlight-m);
+  color: var(--text);
+  margin: 0;
+}
+
+/* ── Simple body: two-column, 64px gap ── */
+
+.dd--simple .dd__body {
+  gap: var(--sp-8);                      /* 64px between columns */
+  align-items: flex-start;
+}
+
+/* ── Simple list: flex-1, right padding, gap between items ── */
+
+.dd--simple .dd__list {
+  flex: 1;
+  min-width: 0;
+  padding-right: var(--sp-10);          /* 128px right padding */
+  gap: var(--sp-6);                      /* 32px between items */
+}
+
+/* ── Simple items: title-5 for both collapsed and expanded ── */
+
+.dd--simple .dd__item-name {
+  font: var(--title-5);               /* 600 17/26 Graphik */
+}
+
+.dd--simple .dd__item--on .dd__item-name {
+  font: var(--title-5);               /* same — no upgrade */
+}
+
+/* ── Simple item head: only pb-16 ── */
+
+.dd--simple .dd__item-head {
+  padding: 0 0 var(--sp-4) 0;           /* 16px bottom only */
+}
+
+/* ── Simple icons: 24px, visible on both states ── */
+
+.dd--simple .dd__item-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.dd--simple .dd__item--on .dd__item-icon {
+  opacity: 1;                            /* override: keep icon visible in Simple */
+  color: var(--brand, var(--gx));        /* active icon uses brand color */
+}
+
+/* ── Simple: no body delay (name doesn't change font) ── */
+
+.dd--simple .dd__item--on .dd__item-body {
+  transition-delay: 0ms;
+}
+
+/* ── Simple expanded content: 22px gap, smaller bottom padding ── */
+
+.dd--simple .dd__item-content {
+  gap: 22px;
+  padding-bottom: var(--sp-4);    /* 16px — breathing room before border */
+}
+
+/* ── Simple: hide elements not used in this variant ── */
+
+.dd--simple .dd__footer,
+.dd--simple .dd__media,
+.dd--simple .dd__item-media,
+.dd--simple .dd__item-link { display: none; }
+
+/* Simple: symmetric padding when split is active (list's internal padding removed) */
+.dd--simple[data-split] { padding-right: var(--sp-10); }
+.dd--simple[data-split] .dd__list { padding-right: 0; }
+
+/* ── Simple Tablet (768px) ── */
+
+.lam-viewport[data-bp="tablet"] .dd--simple {
+  padding: var(--sp-9) var(--sp-7);      /* 80px 48px — symmetric */
+}
+
+.lam-viewport[data-bp="tablet"] .dd--simple .dd__header {
+  align-items: flex-start;
+  text-align: left;
+  position: static;                      /* no sticky in single-column layout */
+}
+
+.lam-viewport[data-bp="tablet"] .dd--simple .dd__body {
+  flex-direction: column;
+  gap: var(--sp-7);                      /* 48px between title group and list */
+}
+
+.lam-viewport[data-bp="tablet"] .dd--simple .dd__list {
+  flex: none;
+  width: 100%;
+  padding-right: 0;
+}
+
+/* ── Simple Mobile (428px) ── */
+
+.lam-viewport[data-bp="mobile"] .dd--simple {
+  padding: var(--sp-8) var(--sp-5);      /* 64px 24px */
+}
+
+.lam-viewport[data-bp="mobile"] .dd--simple .dd__header {
+  align-items: flex-start;
+  text-align: left;
+  position: static;
+}
+
+.lam-viewport[data-bp="mobile"] .dd--simple .dd__body {
+  flex-direction: column;
+  gap: var(--sp-6);                      /* 32px */
+}
+
+.lam-viewport[data-bp="mobile"] .dd--simple .dd__list {
+  flex: none;
+  width: 100%;
+  padding-right: 0;
+}
+
+.lam-viewport[data-bp="mobile"] .dd--simple .dd__item-name,
+.lam-viewport[data-bp="mobile"] .dd--simple .dd__item--on .dd__item-name {
+  font: var(--body-m);                   /* smaller at mobile */
+  font-weight: 600;                      /* keep semibold */
+}
+
+/* ── Future DS dark mode — dormant until [data-ds-theme="dark"] exists ── */
+
+[data-ds-theme="dark"] .dd { background: var(--card); }
+
+/* ── Forced colors / High Contrast Mode ── */
+
+@media (forced-colors: active) {
+  .dd__item { border-color: CanvasText; }
+  .dd__item-head:focus-visible { outline-color: Highlight; }
+  .dd__item-link:focus-visible { outline-color: Highlight; }
+  .dd__footer:focus-visible { outline-color: Highlight; }
+  .dd__media { border: 1px solid CanvasText; }
+}
+
+/* ── Reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .dd__item-head,
+  .dd__item-name,
+  .dd__item-link,
+  .dd__footer,
+  .dd__item-body,
+  .dd__item-icon,
+  .dd__icon-v,
+  .dd__item-content > *,
+  .dd__media img { transition: none; }
+}

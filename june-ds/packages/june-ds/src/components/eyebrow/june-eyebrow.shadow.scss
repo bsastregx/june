@@ -1,0 +1,121 @@
+:host { display: inline-flex; }
+
+.lam-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  padding-block: var(--sp-2); padding-inline: var(--sp-2) var(--sp-4);
+  border: 0.5px solid var(--black); border-radius: var(--r-full);
+  max-width: 100%;
+}
+
+.lam-eyebrow--no-icon {
+  padding-inline-start: var(--sp-4);
+}
+
+.lam-eyebrow__icon {
+  width: 32px; height: 32px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--black); background: var(--eyebrow-fill, var(--card-border)); border-radius: 50%;
+}
+
+.lam-eyebrow__tag {
+  font: var(--body-s);
+  padding: 2px var(--sp-2);
+  background: var(--eyebrow-fill, var(--card-border)); border-radius: var(--r-xs);
+  color: var(--black); flex-shrink: 0;
+}
+
+.lam-eyebrow__body {
+  display: flex; align-items: center; gap: var(--sp-1); min-width: 0;
+}
+
+.lam-eyebrow__text {
+  font: var(--body-xs);
+  color: var(--black);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+}
+
+.lam-eyebrow__dash {
+  font: var(--body-xs);
+  color: var(--black); flex-shrink: 0;
+}
+
+.lam-eyebrow__cta {
+  display: flex; align-items: center; gap: var(--sp-1);
+  font: var(--body-xs-strong);
+  color: var(--black); text-decoration: none;
+  flex-shrink: 0; white-space: nowrap; min-height: 24px; padding: 2px 0;
+}
+
+.lam-eyebrow__chevron {
+  width: 6px; height: 9px; display: inline-flex;
+  transition: transform var(--duration-fast) var(--ease);
+}
+
+/* ── CTA hover — brand tint + chevron slide ── */
+
+.lam-eyebrow__cta {
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.lam-eyebrow__cta:hover {
+  color: var(--brand, var(--gx));
+}
+
+.lam-eyebrow__cta:hover .lam-eyebrow__chevron {
+  transform: translateX(3px);
+}
+
+/* ── CTA focus-visible ── */
+
+.lam-eyebrow__cta:focus-visible {
+  outline: 2px solid var(--brand, var(--gx));
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
+}
+
+/* ── Pill hover — subtle border darken ── */
+
+.lam-eyebrow:hover {
+  border-color: var(--grey-400);
+  transition: border-color var(--duration-fast) var(--ease);
+}
+
+/* ── Entrance animation ── */
+
+@keyframes eyebrow-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.lam-eyebrow {
+  animation: eyebrow-reveal var(--duration) var(--ease) backwards;
+}
+
+/* ── Reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .lam-eyebrow { animation: none; }
+  .lam-eyebrow__cta { transition: none; }
+  .lam-eyebrow__chevron { transition: none; }
+  .lam-eyebrow__cta:hover .lam-eyebrow__chevron { transform: none; }
+}
+
+/* Dark surface: soften border */
+:host-context([data-surface="dark"]) .lam-eyebrow {
+  border-color: rgba(255,255,255,0.25);
+}
+
+:host-context([data-surface="dark"]) .lam-eyebrow:hover {
+  border-color: rgba(255,255,255,0.45);
+}
+
+:host-context([data-surface="dark"]) .lam-eyebrow__cta:hover {
+  color: var(--white);
+}
+
+:host-context([data-surface="dark"]) .lam-eyebrow__cta:focus-visible {
+  outline-color: var(--white);
+}
+

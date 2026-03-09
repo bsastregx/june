@@ -1,0 +1,122 @@
+:host {
+  display: block;
+}
+
+/* ── Container ── */
+
+.sat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-10) var(--_section-px, var(--sp-10));
+  gap: var(--sp-10);
+  background: var(--card);
+  color: var(--black);
+}
+
+/* ── Header (Main Title + Strapline) ── */
+
+.sat__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  width: 940px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.sat__header--left {
+  align-items: flex-start;
+  text-align: start;
+  width: 100%;
+}
+
+/* ── Feature (split layout) ── */
+
+.sat__feature {
+  display: flex;
+  gap: var(--sp-9);
+  width: 100%;
+  align-items: flex-start;
+}
+
+.sat__feature--right {
+  flex-direction: row-reverse;
+}
+
+/* ── Text column ── */
+
+.sat__text {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-6);
+  min-width: 0;
+}
+
+.sat__icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sat__icon ::slotted(*) {
+  width: 64px;
+  height: 64px;
+}
+
+.sat__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  width: 100%;
+}
+
+.sat__cta {
+  display: flex;
+  gap: var(--sp-5);
+  align-items: center;
+}
+
+/* ── Media column ── */
+
+.sat__media {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-2);
+  align-self: stretch;
+  min-width: 0;
+}
+
+.sat__media-wrap {
+  flex: 1 0 0;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sat__media-wrap ::slotted(img) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ── Footer ── */
+
+.sat__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,30 @@
+// June DS Showcase — Global Styles
+// Aggregates all partials
+
+@use 'fonts';
+@use 'tokens/tokens';
+@use 'tokens/responsive';
+@use 'tokens/dark';
+@use 'tokens/brands';
+@use 'tokens/icon-tokens';
+@use 'reset';
+@use 'topbar';
+@use 'sidebar';
+@use 'layout';
+@use 'components';
+@use 'playground';
+
+// Component library styles (needed for non-shadow-DOM showcase rendering)
+@use 'components/blocks/june-blocks';
+@use 'components/button/june-button';
+@use 'components/eyebrow/june-eyebrow';
+@use 'components/look-at-me/june-look-at-me';
+@use 'components/show-and-tell/june-show-and-tell';
+@use 'components/island/june-island';
+@use 'components/smiley-contact-box/june-smiley-contact-box';
+@use 'components/learn-more/june-learn-more';
+@use 'components/card-row/june-card-row';
+@use 'components/deep-dive/june-deep-dive';
+
+// Composition: collapse double padding when stencils stack vertically
+@use 'styles/stencil-stack';

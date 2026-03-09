@@ -1,0 +1,134 @@
+:host {
+  display: block;
+}
+
+/* ── Container (center / full) ── */
+
+.lam-container {
+  position: relative;
+  padding: var(--sp-10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-6);
+  background: var(--card);
+  color: var(--black);
+}
+
+.lam-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Full background image variant */
+
+.lam-container--img-full {
+  --_overlay-from: var(--overlay-dark);
+  --_overlay-to: var(--overlay-medium);
+  background-size: cover;
+  background-position: center;
+  min-height: var(--_hero-min-h, 560px);
+}
+
+.lam-container--img-full::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--_overlay-from) 0%, var(--_overlay-to) 100%);
+  z-index: 0;
+}
+
+.lam-container--img-full .lam-info ::slotted(*) {
+  color: var(--white, #fff);
+}
+
+/* ── Info block ── */
+
+.lam-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  max-width: 940px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ── CTA row ── */
+
+.lam-cta {
+  display: flex;
+  gap: var(--sp-5);
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Left alignment ── */
+
+:host([align='left']) .lam-info {
+  align-items: flex-start;
+  text-align: start;
+}
+
+:host([align='left']) .lam-cta {
+  justify-content: flex-start;
+}
+
+/* ── Split layout (image right) ── */
+
+.lam-split {
+  display: flex;
+  background: var(--card);
+  overflow: hidden;
+}
+
+.lam-split__content {
+  flex: 11;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--sp-6);
+  padding-block: var(--sp-10);
+  padding-inline: var(--sp-8);
+  color: var(--black);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.lam-split__content .lam-info {
+  align-items: flex-start;
+  text-align: start;
+}
+
+.lam-split__content .lam-cta {
+  justify-content: flex-start;
+}
+
+.lam-split__image {
+  flex: 9;
+  overflow: hidden;
+  min-height: 100%;
+  position: relative;
+}
+
+.lam-split__image ::slotted(img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Bottom image ── */
+
+.lam-bottom-image {
+  width: 100%;
+  height: var(--_bottom-img-h, 400px);
+  overflow: hidden;
+}
+
+.lam-bottom-image ::slotted(img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

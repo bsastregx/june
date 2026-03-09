@@ -1,0 +1,123 @@
+/* ─── Button Component ─── */
+.jb {
+  --_p: var(--brand, var(--gx));
+  --_ph: var(--brand-h, var(--gx-h));
+  --_on: var(--brand-on, var(--gx-on));
+  --_a: var(--brand-a, var(--gx-a));
+  --_f: var(--brand, var(--gx));
+  --_sec-bg: #111;
+  --_sec-on: #fff;
+  --_sec-h-bg: color-mix(in srgb, var(--_p) 15%, #111);
+  --_sec-h-on: #fff;
+  --_ter-bg: #fff;
+  --_ter-on: #111;
+  --_ter-h-bg: color-mix(in srgb, var(--_p) 15%, #fff);
+  --_ter-h-on: var(--_p);
+  --_out-bd: var(--black);
+  --_out-t: var(--black);
+  --_txt: var(--black);
+  --_dis-bg: var(--grey-200);
+  --_dis-t: var(--grey-500);
+}
+.jb {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--sp-2); height: 48px;
+  padding: var(--sp-2) var(--sp-5);
+  min-width: 128px;
+  font: var(--label);
+  border: 1px solid transparent; border-radius: var(--r-full);
+  background: transparent; color: var(--_txt); cursor: pointer;
+  outline: none; box-sizing: border-box;
+  transition: background var(--duration-fast) var(--ease),
+              color var(--duration-fast) var(--ease),
+              border-color var(--duration-fast) var(--ease),
+              box-shadow var(--duration-fast) var(--ease),
+              transform var(--duration-fast) var(--ease);
+}
+.jb:active:not(:disabled) { transform: scale(0.97); }
+.jb:disabled { cursor: not-allowed; }
+.jb:focus-visible { outline: 2px solid var(--_f); outline-offset: 2px; }
+.jb__i { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 20px; height: 20px; }
+.jb__i svg { width: 100%; height: 100%; }
+.jb:has(.jb__i:first-child) { padding-left: 20px; }
+
+.jb--pri { background: var(--_p); color: var(--_on); }
+.jb--pri:hover:not(:disabled) { background: var(--_ph); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.jb--pri:disabled { background: var(--_dis-bg); color: var(--_dis-t); }
+
+.jb--sec { background: var(--_sec-bg); color: var(--_sec-on); }
+.jb--sec:hover:not(:disabled) { background: var(--_sec-h-bg); color: var(--_sec-h-on); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.jb--sec:disabled { background: var(--_dis-bg); color: var(--_dis-t); }
+
+.jb--ter { background: var(--_ter-bg); color: var(--_ter-on); box-shadow: var(--shadow-sm); }
+.jb--ter:hover:not(:disabled) { background: var(--_ter-h-bg); color: var(--_ter-h-on); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.jb--ter:disabled { background: var(--_dis-bg); color: var(--_dis-t); }
+
+.jb--out { background: transparent; color: var(--_out-t); border-color: var(--_out-bd); }
+.jb--out:hover:not(:disabled) { border-color: var(--grey-300); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.jb--out:disabled { border-color: var(--_dis-bg); color: var(--_dis-t); }
+
+.jb--pln { background: transparent; color: var(--_txt); border: none; border-radius: 0; min-width: auto; padding: var(--sp-2) 0; }
+.jb--pln:hover:not(:disabled) { text-decoration: underline; text-underline-offset: 3px; }
+.jb--pln:disabled { color: var(--_dis-t); }
+
+.jb--ico { background: transparent; color: var(--_txt); border: none; border-radius: var(--r-sm); min-width: auto; height: auto; padding: var(--sp-2); gap: 0; }
+.jb--ico:hover:not(:disabled) { opacity: 0.7; }
+.jb--ico:disabled { color: var(--_dis-t); }
+.jb.jb--ico:has(.jb__i:first-child) { padding-left: var(--sp-2); }
+
+/* Force-state classes (for showcase matrix) */
+.jb--pri.jb--hover { background: var(--_ph); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.jb--sec.jb--hover { background: var(--_sec-h-bg); color: var(--_sec-h-on); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.jb--ter.jb--hover { background: var(--_ter-h-bg); color: var(--_ter-h-on); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.jb--out.jb--hover { border-color: var(--grey-300); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.jb--pln.jb--hover { text-decoration: underline; text-underline-offset: 3px; }
+.jb--ico.jb--hover { opacity: 0.7; }
+
+.jb.jb--focus { outline: 2px solid var(--_f); outline-offset: 2px; }
+
+.jb.jb--active { transform: scale(0.97); }
+.jb--pri.jb--active { background: var(--_ph); box-shadow: var(--shadow-md); }
+.jb--sec.jb--active { background: var(--_sec-h-bg); color: var(--_sec-h-on); box-shadow: var(--shadow-md); }
+.jb--ter.jb--active { background: var(--_ter-h-bg); color: var(--_ter-h-on); box-shadow: var(--shadow-md); }
+.jb--out.jb--active { border-color: var(--grey-300); box-shadow: var(--shadow-md); }
+.jb--pln.jb--active { text-decoration: underline; text-underline-offset: 3px; }
+.jb--ico.jb--active { opacity: 0.7; }
+
+/* Button brands — standalone/Light DOM override */
+[data-brand="gx"] .jb { --_p: var(--gx); --_ph: var(--gx-h); --_on: var(--gx-on); --_a: var(--gx-a); --_f: var(--gx); }
+[data-brand="nx"] .jb { --_p: var(--nx); --_ph: var(--nx-h); --_on: var(--nx-on); --_a: var(--nx-a); --_f: var(--nx); }
+[data-brand="ge"] .jb { --_p: var(--ge); --_ph: var(--ge-h); --_on: var(--ge-on); --_a: var(--ge-a); --_f: var(--ge); }
+
+/* Button dark surface */
+[data-surface="dark"] .jb {
+  --_txt: #fff;
+  --_out-bd: #fff;
+  --_out-t: #fff;
+  --_dis-bg: #2a2f35; --_dis-t: #707880;
+}
+[data-surface="dark"] .jb--out:hover:not(:disabled) { border-color: transparent; background: rgba(255,255,255,0.08); }
+[data-surface="dark"] .jb--out.jb--hover { border-color: transparent; background: rgba(255,255,255,0.08); }
+
+/* TEMPORARY: Dark mode via body.dm (showcase toggle).
+   These rules + the [data-surface="light"] restoration below are a stopgap.
+   When June DS gets its own dark mode, migrate to [data-ds-theme="dark"]. */
+body.dm .jb {
+  --_txt: #fff;
+  --_out-bd: #fff;
+  --_out-t: #fff;
+  --_dis-bg: #2a2f35; --_dis-t: #707880;
+}
+body.dm .jb--out:hover:not(:disabled) { border-color: transparent; background: rgba(255,255,255,0.08); }
+body.dm .jb--out.jb--hover { border-color: transparent; background: rgba(255,255,255,0.08); }
+
+/* TEMPORARY: restore light tokens inside preview frames (pairs with body.dm above) */
+body.dm [data-surface="light"] .jb {
+  --_txt: var(--grey-900);
+  --_out-bd: var(--black);
+  --_out-t: var(--grey-900);
+  --_dis-bg: var(--grey-200); --_dis-t: var(--grey-500);
+}
+
+@media (prefers-reduced-motion: reduce) { .jb { transition: none; } }
+svg.si { width: 20px; height: 20px; }
